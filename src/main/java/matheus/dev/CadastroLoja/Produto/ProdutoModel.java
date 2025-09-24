@@ -1,6 +1,9 @@
-package matheus.dev.CadastroLoja;
+package matheus.dev.CadastroLoja.Produto;
 
 import jakarta.persistence.*;
+import matheus.dev.CadastroLoja.Cliente.ClienteModel;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tab_produto")
@@ -11,6 +14,9 @@ public class ProdutoModel {
     private Long id;
     private String nome;
     private int quantidade;
+
+    @OneToMany(mappedBy = "produtos")
+    private List<ClienteModel> cliente;
 
     public ProdutoModel() {
     }
