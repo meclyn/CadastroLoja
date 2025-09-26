@@ -8,9 +8,4 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping
 public class ProdutoController {
 
-    @GetMapping("/boasvindas")
-    public String boasVindas(){
-        return "Boas Vindas";
-
     }
-}
