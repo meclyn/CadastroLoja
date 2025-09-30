@@ -2,7 +2,7 @@ package matheus.dev.CadastroLoja.Cliente;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/cliente")
 public class ClienteController {
 
     @GetMapping("/boasvindas")
@@ -11,7 +11,7 @@ public class ClienteController {
     }
 
     //Adicionar Cliente
-    @PostMapping("/criarCliente")
+    @PostMapping("/criar")
     public String criarCliente(){
         return "Cliente criado com sucesso!";
     }
@@ -23,19 +23,19 @@ public class ClienteController {
     }
 
     //Mostrar todos os Clientes
-    @GetMapping("/listarTodos")
+    @GetMapping("/listar")
     public String listarTodos() {
         return "Lista de Clientes!";
     }
 
     //Alterar dados do Cliente
-    @PutMapping("/alterarCliente")
+    @PutMapping("/alterar")
     public String alterarCliente(){
         return "Cliente alterado com sucesso!";
     }
 
     //Deletar Cliente
-    @PostMapping("/deletarCliente")
+    @PostMapping("/deletar")
     public String deletarCliente(){
         return "Cliente deletado com sucesso!";
     }
