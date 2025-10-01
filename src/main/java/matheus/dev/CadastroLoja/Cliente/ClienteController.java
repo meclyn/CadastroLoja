@@ -1,9 +1,17 @@
 package matheus.dev.CadastroLoja.Cliente;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
+
+    private ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @GetMapping("/boasvindas")
     public String boasVindas(){
@@ -24,8 +32,8 @@ public class ClienteController {
 
     //Mostrar todos os Clientes
     @GetMapping("/listar")
-    public String listarTodos() {
-        return "Lista de Clientes!";
+    public List<ClienteModel> listarClientes() {
+        return clienteService.listarClientes();
     }
 
     //Alterar dados do Cliente

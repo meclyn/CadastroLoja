@@ -2,9 +2,17 @@ package matheus.dev.CadastroLoja.Produto;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/produto")
 public class ProdutoController {
+
+    private ProdutoService produtoService;
+
+    public ProdutoController(ProdutoService produtoService) {
+        this.produtoService = produtoService;
+    }
 
     //Adicionar Produto
     @PostMapping("/criar")
@@ -20,8 +28,8 @@ public class ProdutoController {
 
     //Listar todos os Produtos
     @GetMapping("/listar")
-        public String listarProdutos(){
-        return "Produtos listados com sucesso!";
+        public List<ProdutoModel> listarProdutos(){
+        return produtoService.listarProdutos();
     }
 
     //Alterar dados do Produto
