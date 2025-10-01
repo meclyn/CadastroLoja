@@ -1,5 +1,6 @@
 package matheus.dev.CadastroLoja.Produto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,5 +43,6 @@ public class ProdutoModel {
     private String imgUrl;
 
     @OneToMany(mappedBy = "produtos")
+    @JsonIgnore
     private List<ClienteModel> cliente;
 }
