@@ -3,6 +3,7 @@ package matheus.dev.CadastroLoja.Cliente;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClienteService {
@@ -15,6 +16,11 @@ public class ClienteService {
     // listar os clientes
     public List<ClienteModel> listarClientes() {
         return clienteRepository.findAll();
+    }
+
+    public ClienteModel listarClientesPorId(Long id) {
+        Optional<ClienteModel> clientePorId = clienteRepository.findById(id);
+        return clientePorId.orElse(null);
     }
 
 }

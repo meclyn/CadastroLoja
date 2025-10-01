@@ -25,9 +25,9 @@ public class ClienteController {
     }
     
     //Procurar Cliente por ID
-    @GetMapping("/listarID")
-    public String listarID(){
-        return "Cliente encontrado com sucesso!";
+    @GetMapping("/listar/{id}")
+    public ClienteModel listarClientePorId(@PathVariable Long id){
+        return clienteService.listarClientesPorId(id);
     }
 
     //Mostrar todos os Clientes
