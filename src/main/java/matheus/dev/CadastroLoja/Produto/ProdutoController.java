@@ -39,8 +39,8 @@ public class ProdutoController {
     }
 
     //Deletar Produto
-    @PostMapping("/deletar")
-    public String deletarProduto() {
-        return "Produto deletado com sucesso!";
+    @PostMapping("/deletar/{id}")
+    public void deletarProduto(@PathVariable Long id) {
+        produtoService.deletarProduto(id);
     }
 }

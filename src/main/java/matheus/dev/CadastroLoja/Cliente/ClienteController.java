@@ -43,8 +43,10 @@ public class ClienteController {
     }
 
     //Deletar Cliente
-    @PostMapping("/deletar")
-    public String deletarCliente(){
-        return "Cliente deletado com sucesso!";
+    @PostMapping("/deletar/{id}")
+    public void deletarCliente(@PathVariable Long id){
+        clienteService.deletarCliente(id);
+
     }
+
 }

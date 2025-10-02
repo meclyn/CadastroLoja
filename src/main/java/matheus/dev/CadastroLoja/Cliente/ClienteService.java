@@ -29,5 +29,11 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
+    //deletar o ninja
+    public void deletarCliente(Long id){
+        clienteRepository.deleteById(id);
+
+    }
+
 
 }
