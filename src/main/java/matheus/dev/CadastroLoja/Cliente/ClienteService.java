@@ -29,10 +29,18 @@ public class ClienteService {
         return clienteRepository.save(cliente);
     }
 
-    //deletar o ninja
+    //deletar o cliente
     public void deletarCliente(Long id){
         clienteRepository.deleteById(id);
+    }
 
+    //atualizar o cliente
+    public ClienteModel atualizarCliente(Long id, ClienteModel clienteAtualizado){
+        if(clienteRepository.existsById(id)){
+            clienteAtualizado.setId(id);
+            return clienteRepository.save(clienteAtualizado);
+        }
+        return null;
     }
 
 

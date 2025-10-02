@@ -1,6 +1,7 @@
 package matheus.dev.CadastroLoja.Produto;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,19 @@ public class ProdutoService {
         return produtoRepository.save(produto);
     }
 
+    //deletar produto
     public void deletarProduto(Long id){
         produtoRepository.deleteById(id);
+    }
+
+    //atualizar produto
+    public ProdutoModel atualizarProduto(Long id, ProdutoModel produtoAtualizado){
+        if(produtoRepository.existsById(id)){
+            produtoAtualizado.setId(id);
+            produtoRepository.save(produtoAtualizado);
+        }
+        return null;
+
+
     }
 }

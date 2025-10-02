@@ -33,9 +33,9 @@ public class ProdutoController {
     }
 
     //Alterar dados do Produto
-    @PutMapping("/alterar")
-    public String alterarProduto() {
-        return "Produto alterado com sucesso!";
+    @PutMapping("/alterar/{id}")
+    public ProdutoModel atualizarProduto(@PathVariable Long id, @RequestBody ProdutoModel produtoAtualizado) {
+        return produtoService.atualizarProduto(id, produtoAtualizado);
     }
 
     //Deletar Produto
