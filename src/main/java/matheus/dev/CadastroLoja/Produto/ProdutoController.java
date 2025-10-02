@@ -16,14 +16,14 @@ public class ProdutoController {
 
     //Adicionar Produto
     @PostMapping("/criar")
-    public String criarProduto(){
-        return "Produto criado com sucesso!";
+    public ProdutoModel criarProduto(@RequestBody ProdutoModel produto){
+        return produtoService.criarProduto(produto);
     }
 
     //Procurar Produto por ID
     @GetMapping("/listarID")
-    public String listarProdutoID(){
-        return "Produto listado com sucesso!";
+    public ProdutoModel listarProdutoPorId(@PathVariable Long id){
+        return produtoService.listarProdutoPorId(id);
     }
 
     //Listar todos os Produtos

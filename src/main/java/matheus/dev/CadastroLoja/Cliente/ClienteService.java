@@ -18,9 +18,16 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    // listar por id
     public ClienteModel listarClientesPorId(Long id) {
         Optional<ClienteModel> clientePorId = clienteRepository.findById(id);
         return clientePorId.orElse(null);
     }
+
+    //criar um novo cliente
+    public ClienteModel criarCliente(ClienteModel cliente) {
+        return clienteRepository.save(cliente);
+    }
+
 
 }

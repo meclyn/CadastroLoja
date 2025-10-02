@@ -20,8 +20,8 @@ public class ClienteController {
 
     //Adicionar Cliente
     @PostMapping("/criar")
-    public String criarCliente(){
-        return "Cliente criado com sucesso!";
+    public ClienteModel criarCliente(@RequestBody ClienteModel cliente){
+        return clienteService.criarCliente(cliente);
     }
     
     //Procurar Cliente por ID
