@@ -9,9 +9,11 @@ import java.util.Optional;
 @Service
 public class ProdutoService {
     private ProdutoRepository produtoRepository;
+    private ProdutoMapper produtoMapper;
 
-    public ProdutoService(ProdutoRepository produtoRepository) {
+    public ProdutoService(ProdutoRepository produtoRepository, ProdutoMapper produtoMapper) {
         this.produtoRepository = produtoRepository;
+        this.produtoMapper = produtoMapper;
     }
 
     //listar produtos
@@ -26,8 +28,10 @@ public class ProdutoService {
     }
 
     //criar produto
-    public ProdutoModel criarProduto(ProdutoModel produto) {
-        return produtoRepository.save(produto);
+    public ProdutoDTO criarProduto(ProdutoDTO produtoDTO) {
+        ProdutoModel produto = produtoMapper.map(produtoDTO);
+        produto = produtoRepository.save(produto);
+        return produtoMapper.map(produto);
     }
 
     //deletar produto

@@ -8,10 +8,13 @@ import java.util.Optional;
 @Service
 public class ClienteService {
     private ClienteRepository clienteRepository;
+    private ClienteMapper clienteMapper;
 
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository, ClienteMapper clienteMapper) {
         this.clienteRepository = clienteRepository;
+        this.clienteMapper = clienteMapper;
     }
+
 
     // listar os clientes
     public List<ClienteModel> listarClientes() {
@@ -25,8 +28,10 @@ public class ClienteService {
     }
 
     //criar um novo cliente
-    public ClienteModel criarCliente(ClienteModel cliente) {
-        return clienteRepository.save(cliente);
+    public ClienteDTO criarCliente(ClienteDTO clienteDTO) {
+        ClienteModel cliente = clienteMapper.map(clienteDTO);
+        cliente = clienteRepository.save(cliente);
+        return clienteMapper.map(cliente);
     }
 
     //deletar o cliente
