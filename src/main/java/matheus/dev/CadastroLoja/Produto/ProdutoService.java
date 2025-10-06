@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProdutoService {
@@ -17,14 +18,18 @@ public class ProdutoService {
     }
 
     //listar produtos
-    public List<ProdutoModel> listarProdutos(){
-        return produtoRepository.findAll();
+    public List<ProdutoDTO> listarProdutos(){
+        List<ProdutoModel> produtos = produtoRepository.findAll();
+        return produtos.stream()
+                .map(produtoMapper::map)
+                .collect(Collectors.toList());
+
     }
 
     //listar produto por id
-    public ProdutoModel listarProdutoPorId(Long id){
+    public ProdutoDTO listarProdutoPorId(Long id){
         Optional<ProdutoModel> produtoPorId = produtoRepository.findById(id);
-        return produtoPorId.orElse(null);
+        return produtoPorId.map(produtoMapper::map).orElse(null);
     }
 
     //criar produto
@@ -40,12 +45,16 @@ public class ProdutoService {
     }
 
     //atualizar produto
-    public ProdutoModel atualizarProduto(Long id, ProdutoModel produtoAtualizado){
-        if(produtoRepository.existsById(id)){
+    public ProdutoDTO atualizarProduto(Long id, ProdutoDTO produtoDTO){
+        Optional<ProdutoModel> produtoExistente = produtoRepository.findById(id);
+        if(produtoExistente.isPresent()) {
+            ProdutoModel produtoAtualizado = produtoMapper.map(produtoDTO);
             produtoAtualizado.setId(id);
-            produtoRepository.save(produtoAtualizado);
+            ProdutoModel produtoSalvo = produtoRepository.save(produtoAtualizado);
+            return produtoMapper.map(produtoSalvo);
         }
         return null;
+
 
 
     }
