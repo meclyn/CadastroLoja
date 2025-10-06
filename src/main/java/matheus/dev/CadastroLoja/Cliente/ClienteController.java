@@ -20,25 +20,25 @@ public class ClienteController {
 
     //Adicionar Cliente
     @PostMapping("/criar")
-    public ClienteModel criarCliente(@RequestBody ClienteModel cliente){
+    public ClienteDTO criarCliente(@RequestBody ClienteDTO cliente){
         return clienteService.criarCliente(cliente);
     }
     
     //Procurar Cliente por ID
     @GetMapping("/listar/{id}")
-    public ClienteModel listarClientePorId(@PathVariable Long id){
+    public ClienteDTO listarClientePorId(@PathVariable Long id){
         return clienteService.listarClientesPorId(id);
     }
 
     //Mostrar todos os Clientes
     @GetMapping("/listar")
-    public List<ClienteModel> listarClientes() {
+    public List<ClienteDTO> listarClientes() {
         return clienteService.listarClientes();
     }
 
     //Alterar dados do Cliente
     @PutMapping("/alterar/{id}")
-    public ClienteModel alterarCliente(@PathVariable Long id, @RequestBody ClienteModel clienteAtualizado){
+    public ClienteDTO alterarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteAtualizado){
         return clienteService.atualizarCliente(id, clienteAtualizado);
     }
 
