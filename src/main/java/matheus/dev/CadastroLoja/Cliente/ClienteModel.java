@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import matheus.dev.CadastroLoja.Produto.ProdutoModel;
 
 
@@ -13,6 +14,7 @@ import matheus.dev.CadastroLoja.Produto.ProdutoModel;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString(exclude = "produtos")
 public class ClienteModel {
 
     @Id
