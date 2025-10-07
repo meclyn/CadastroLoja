@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/cliente")
 public class ClienteController {
 
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
 
     public ClienteController(ClienteService clienteService) {
         this.clienteService = clienteService;
