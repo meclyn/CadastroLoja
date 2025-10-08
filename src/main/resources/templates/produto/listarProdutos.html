@@ -1,0 +1,175 @@
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lista de Produtos</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin-top: 40px;
+            color: #00bfff;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            background: #2a2a40;
+            margin-top: 30px;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        thead {
+            background-color: #00bfff;
+            color: white;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        tr:hover {
+            background-color: rgba(0, 191, 255, 0.1);
+            transition: 0.3s;
+        }
+
+        img {
+            border-radius: 8px;
+            border: 1px solid #555;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn {
+            background-color: #00bfff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0099cc;
+            box-shadow: 0 0 10px #00bfff;
+            transform: translateY(-2px);
+        }
+
+        .btn-editar {
+            background-color: #ffc107;
+            color: #222;
+        }
+
+        .btn-editar:hover {
+            background-color: #ffca2c;
+            box-shadow: 0 0 10px #ffc107;
+        }
+
+        .btn-excluir {
+            background-color: #ff4757;
+        }
+
+        .btn-excluir:hover {
+            background-color: #ff6b81;
+            box-shadow: 0 0 10px #ff4757;
+        }
+
+        .add-btn {
+            background-color: #00bfff;
+            padding: 10px 18px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            margin-top: 25px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #0099cc;
+            box-shadow: 0 0 15px #00bfff;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            th, td {
+                font-size: 0.85rem;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+<h1>Lista de Produtos</h1>
+
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+            <th>Categoria</th>
+            <th>Marca</th>
+            <th>Imagem</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="produto : ${produtos}">
+            <td th:text="${produto.id}"></td>
+            <td th:text="${produto.nome}"></td>
+            <td th:text="${produto.descricao}"></td>
+            <td th:text="${#numbers.formatDecimal(produto.preco, 2, 'COMMA', 2, 'POINT')}"></td>
+            <td th:text="${produto.quantidade}"></td>
+            <td th:text="${produto.categoria}"></td>
+            <td th:text="${produto.marca}"></td>
+            <td>
+                <img th:src="${produto.imgUrl}" alt="Imagem do Produto" width="80" height="80">
+            </td>
+            <td class="actions">
+                <a th:href="@{/produto/ui/detalhes/{id}(id=${produto.id})}" class="btn">Detalhes</a>
+                <a th:href="@{/produto/ui/editar/{id}(id=${produto.id})}" class="btn btn-editar">Editar</a>
+                <a th:href="@{/produto/ui/excluir/{id}(id=${produto.id})}" class="btn btn-excluir">Excluir</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<a href="/produto/ui/novo" class="add-btn">+ Adicionar Produto</a>
+</body>
+</html>
