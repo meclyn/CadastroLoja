@@ -1,10 +1,156 @@
-<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adicionar Produto</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: #2a2a40;
+            margin-top: 50px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            color: #00bfff;
+            text-shadow: 0 0 12px rgba(0, 191, 255, 0.6);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #00bfff;
+            margin-bottom: 5px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: none;
+            background: #1e1e2f;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: inset 0 0 5px rgba(0, 191, 255, 0.3);
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            box-shadow: 0 0 10px #00bfff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            background-color: #00bfff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 18px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #0099cc;
+            box-shadow: 0 0 10px #00bfff;
+            transform: translateY(-2px);
+        }
+
+        .btn-voltar {
+            background-color: #555;
+        }
+
+        .btn-voltar:hover {
+            background-color: #666;
+            box-shadow: 0 0 10px #888;
+        }
+
+    </style>
 </head>
 <body>
-$END$
+
+<div class="container">
+    <h1>Adicionar Novo Produto</h1>
+
+    <form th:action="@{/produto/ui/salvar}" th:object="${produto}" method="post">
+        <div>
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" th:field="*{nome}" required placeholder="Nome do produto">
+        </div>
+
+        <div>
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" th:field="*{descricao}" placeholder="Descrição do produto"></textarea>
+        </div>
+
+        <div>
+            <label for="preco">Preço:</label>
+            <input type="number" step="0.01" id="preco" th:field="*{preco}" required placeholder="0.00">
+        </div>
+
+        <div>
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" th:field="*{quantidade}" required placeholder="Quantidade em estoque">
+        </div>
+
+        <div>
+            <label for="categoria">Categoria:</label>
+            <input type="text" id="categoria" th:field="*{categoria}" placeholder="Categoria do produto">
+        </div>
+
+        <div>
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" th:field="*{marca}" placeholder="Marca do produto">
+        </div>
+
+        <div>
+            <label for="imgUrl">URL da Imagem:</label>
+            <input type="url" id="imgUrl" th:field="*{imgUrl}" placeholder="https://exemplo.com/imagem.jpg">
+        </div>
+
+        <div class="buttons">
+            <a href="/produto/ui/listar" class="btn btn-voltar">Voltar</a>
+            <button type="submit" class="btn">Salvar</button>
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

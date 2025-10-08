@@ -1,6 +1,5 @@
 package matheus.dev.CadastroLoja.Produto;
 
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +62,7 @@ public class ProdutoController {
     }
 
     //Deletar Produto
-    @PostMapping("/deletar/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<String> deletarProduto(@PathVariable Long id) {
         if(produtoService.listarProdutoPorId(id) != null){
             produtoService.deletarProduto(id);
