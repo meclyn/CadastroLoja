@@ -1,0 +1,167 @@
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detalhes do Cliente</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: #2a2a40;
+            margin-top: 40px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            text-align: center;
+            color: #00bfff;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .info div {
+            background-color: #3a3a55;
+            padding: 12px 16px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        }
+
+        .info div strong {
+            color: #00bfff;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        h2 {
+            margin-top: 25px;
+            color: #00bfff;
+        }
+
+        ul {
+            background-color: #3a3a55;
+            padding: 15px 20px;
+            border-radius: 10px;
+            list-style: none;
+        }
+
+        ul li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        ul li:last-child {
+            border-bottom: none;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+            background: #00bfff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            background: #0099cc;
+            box-shadow: 0 0 10px #00bfff;
+            transform: translateY(-2px);
+        }
+
+        .delete {
+            background: #ff4757;
+        }
+
+        .delete:hover {
+            background: #ff6b81;
+            box-shadow: 0 0 10px #ff4757;
+        }
+
+        @media (max-width: 700px) {
+            .info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Detalhes do Cliente</h1>
+
+    <div class="info">
+        <div>
+            <strong>ID</strong>
+            <span th:text="${cliente.id}">1</span>
+        </div>
+        <div>
+            <strong>Nome</strong>
+            <span th:text="${cliente.nome}">Nome do Cliente</span>
+        </div>
+        <div>
+            <strong>Idade</strong>
+            <span th:text="${cliente.idade}">25</span>
+        </div>
+        <div>
+            <strong>Email</strong>
+            <span th:text="${cliente.email}">email@exemplo.com</span>
+        </div>
+        <div>
+            <strong>CPF</strong>
+            <span th:text="${cliente.cpf}">000.000.000-00</span>
+        </div>
+        <div>
+            <strong>Sexo</strong>
+            <span th:text="${cliente.sexo}">Masculino</span>
+        </div>
+        <div>
+            <strong>Telefone</strong>
+            <span th:text="${cliente.telefone}">(11) 99999-9999</span>
+        </div>
+        <div>
+            <strong>Endereço</strong>
+            <span th:text="${cliente.endereco}">Rua Exemplo, 123</span>
+        </div>
+    </div>
+
+    <h2>Produtos</h2>
+    <ul>
+        <li th:each="produto : ${cliente.produtos}" th:text="${produto.nome}">Produto Exemplo</li>
+    </ul>
+
+    <div class="actions">
+        <a th:href="@{/clientes}">Voltar</a>
+        <a th:href="@{/cliente/ui/editar/{id}(id=${cliente.id})}">Editar</a>
+        <a th:href="@{/cliente/ui/deletar/{id}(id=${cliente.id})}" class="delete">Excluir</a>
+    </div>
+</div>
+</body>
+</html>

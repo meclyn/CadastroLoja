@@ -1,7 +1,5 @@
 package matheus.dev.CadastroLoja.Cliente;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,7 +64,7 @@ public class ClienteController {
     }
 
     //Deletar Cliente
-    @PostMapping("/deletar/{id}")
+    @DeleteMapping("/deletar/{id}")
     public ResponseEntity<String> deletarCliente(@PathVariable Long id) {
 
         if (clienteService.listarClientesPorId(id) != null) {

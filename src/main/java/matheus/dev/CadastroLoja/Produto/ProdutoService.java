@@ -1,8 +1,6 @@
 package matheus.dev.CadastroLoja.Produto;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

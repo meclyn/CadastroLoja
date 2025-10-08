@@ -1,0 +1,183 @@
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Adicionar Cliente</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background: #2a2a40;
+            margin-top: 40px;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            text-align: center;
+            color: #00bfff;
+            margin-bottom: 25px;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        label {
+            font-weight: 600;
+            color: #00bfff;
+            margin-bottom: 5px;
+        }
+
+        input, select, textarea {
+            background-color: #3a3a55;
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            box-shadow: 0 0 10px #00bfff;
+        }
+
+        select[multiple] {
+            height: 120px;
+            overflow-y: auto;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        button, a {
+            background: #00bfff;
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        button:hover, a:hover {
+            background: #0099cc;
+            box-shadow: 0 0 10px #00bfff;
+            transform: translateY(-2px);
+        }
+
+        a.cancelar {
+            background: #ff4757;
+        }
+
+        a.cancelar:hover {
+            background: #ff6b81;
+            box-shadow: 0 0 10px #ff4757;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Adicionar Cliente</h1>
+
+    <form th:action="@{/cliente/ui/salvar}" th:object="${cliente}" method="post">
+
+        <div>
+            <label for="nome">Nome:</label>
+            <input id="nome" type="text" th:field="*{nome}" placeholder="Digite o nome completo" required>
+        </div>
+
+        <div>
+            <label for="idade">Idade:</label>
+            <input id="idade" type="number" th:field="*{idade}" min="0" placeholder="Ex: 30" required>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input id="email" type="email" th:field="*{email}" placeholder="exemplo@email.com" required>
+        </div>
+
+        <div>
+            <label for="cpf">CPF:</label>
+            <input id="cpf" type="text" th:field="*{cpf}" placeholder="000.000.000-00" required>
+        </div>
+
+        <div>
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" th:field="*{sexo}" required>
+                <option value="">Selecione</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Feminino">Feminino</option>
+                <option value="Outro">Outro</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="telefone">Telefone:</label>
+            <input id="telefone" type="text" th:field="*{telefone}" placeholder="(00) 00000-0000" required>
+        </div>
+
+        <div>
+            <label for="endereco">Endereço:</label>
+            <textarea id="endereco" rows="2" th:field="*{endereco}" placeholder="Rua, número, bairro, cidade" required></textarea>
+        </div>
+
+        <div>
+            <label for="produtos">Produtos:</label>
+            <select id="produtos" th:field="*{produtos}" multiple>
+                <option th:each="produto : ${produtos}"
+                        th:value="${produto.id}"
+                        th:text="${produto.nome}">
+                    Produto Exemplo
+                </option>
+            </select>
+            <small style="color: #aaa; font-size: 0.85rem;">
+                (Segure <b>Ctrl</b> ou <b>Cmd</b> para selecionar vários)
+            </small>
+        </div>
+
+        <div class="actions">
+            <button type="submit">Salvar</button>
+            <a th:href="@{/cliente/ui/listar}" class="cancelar">Cancelar</a>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tabela de Clientes</title>
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            margin: 30px 0;
+            color: #00bfff;
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+        }
+
+        table {
+            width: 90%;
+            border-collapse: collapse;
+            background-color: #2a2a40;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        thead {
+            background-color: #00bfff;
+            color: #fff;
+        }
+
+        thead th {
+            padding: 14px;
+            text-align: left;
+            font-size: 1rem;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background-color: rgba(0, 191, 255, 0.1);
+            transform: scale(1.01);
+        }
+
+        td {
+            padding: 12px;
+            font-size: 0.95rem;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        ul li {
+            list-style: disc;
+        }
+
+        /* Botões */
+        a {
+            text-decoration: none;
+            color: white;
+            background: #00bfff;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: 0.3s;
+            margin-right: 6px;
+            display: inline-block;
+        }
+
+        a:hover {
+            background: #0099cc;
+            box-shadow: 0 0 10px #00bfff;
+            transform: translateY(-2px);
+        }
+
+        /* Botão Deletar com cor especial */
+        a[th\\:href*='deletar'] {
+            background: #ff4757;
+        }
+
+        a[th\\:href*='deletar']:hover {
+            background: #ff6b81;
+            box-shadow: 0 0 10px #ff4757;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            table {
+                font-size: 0.8rem;
+            }
+            thead {
+                display: none;
+            }
+            tbody tr {
+                display: block;
+                margin-bottom: 15px;
+                background-color: #2a2a40;
+                border-radius: 8px;
+                padding: 10px;
+            }
+            tbody td {
+                display: flex;
+                justify-content: space-between;
+                border: none;
+                padding: 8px;
+            }
+            tbody td::before {
+                content: attr(data-label);
+                font-weight: bold;
+                color: #00bfff;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<h1>Lista de Clientes</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Idade</th>
+        <th>Email</th>
+        <th>CPF</th>
+        <th>Sexo</th>
+        <th>Telefone</th>
+        <th>Endereço</th>
+        <th>Produtos</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="cliente : ${clientes}">
+        <td th:text="${cliente.id}" data-label="ID">1</td>
+        <td th:text="${cliente.nome}" data-label="Nome">Nome</td>
+        <td th:text="${cliente.idade}" data-label="Idade">Idade</td>
+        <td th:text="${cliente.email}" data-label="Email">Email</td>
+        <td th:text="${cliente.cpf}" data-label="CPF">CPF</td>
+        <td th:text="${cliente.sexo}" data-label="Sexo">Sexo</td>
+        <td th:text="${cliente.telefone}" data-label="Telefone">Telefone</td>
+        <td th:text="${cliente.endereco}" data-label="Endereço">Endereço</td>
+        <td data-label="Produtos">
+            <ul>
+                <li th:each="produto : ${cliente.produtos}" th:text="${produto.nome}">Produto</li>
+            </ul>
+        </td>
+        <td data-label="Ações">
+            <a th:href="@{/cliente/ui/listar/{id}(id=${cliente.id})}">Ver detalhes</a>
+            <a th:href="@{/cliente/ui/alterar/{id}(id=${cliente.id})}">Alterar</a>
+            <a th:href="@{/cliente/ui/deletar/{id}(id=${cliente.id})}">Deletar</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
