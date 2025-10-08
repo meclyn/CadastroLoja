@@ -70,6 +70,7 @@ public class ClienteControllerUi {
     @GetMapping("/alterar/{id}")
     public String mostrarFormularioAlterarCliente(@PathVariable Long id, Model model) {
         ClienteDTO cliente = clienteService.listarClientesPorId(id);
+
         if (cliente != null) {
             model.addAttribute("cliente", cliente);
             return "alterarCliente";
