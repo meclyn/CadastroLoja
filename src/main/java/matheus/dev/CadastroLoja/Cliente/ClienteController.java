@@ -1,4 +1,7 @@
 package matheus.dev.CadastroLoja.Cliente;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,12 +18,19 @@ public class ClienteController {
         this.clienteService = clienteService;
     }
 
+    @Operation(summary = "Mensagem de boas vindas", description = "Endpoint para retornar uma mensagem de boas vindas ao acessar /cliente")
     @GetMapping("/boasvindas")
     public String boasVindas(){
         return "boas vindas ao /cliente";
     }
 
     //Adicionar Cliente
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "201", description = "Cliente criado com sucesso"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Requisição inválida")
+    })
+
+    @Operation(summary = "Cria um novo cliente", description = "Rota cria novo cliente e insere no banco de dados")
     @PostMapping("/criar")
     public ResponseEntity<String> criarCliente(@RequestBody ClienteDTO cliente){
 
@@ -30,6 +40,12 @@ public class ClienteController {
     }
     
     //Procurar Cliente por ID
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Cliente encontrado com sucesso"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Cliente não encontrado")
+    })
+
+    @Operation(summary = "Lista um cliente por ID", description = "Rota lista cliente pelo seu ID")
     @GetMapping("/listar/{id}")
     public ResponseEntity<?> listarClientePorId(@PathVariable Long id){
 
@@ -49,8 +65,18 @@ public class ClienteController {
     }
 
     //Alterar dados do Cliente
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Cliente atualizado com sucesso"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "404", description = "Requisição inválida")
+    })
+
+    @Operation(summary = "Atualiza um cliente por ID", description = "Rota atualiza um cliente pelo seu ID")
     @PutMapping("/alterar/{id}")
-    public ResponseEntity<?> alterarCliente(@PathVariable Long id, @RequestBody ClienteDTO clienteAtualizado){
+    public ResponseEntity<?> alterarCliente(
+            @Parameter(description = "Usuario manda o id no caminho da requisicao")
+            @PathVariable Long id,
+            @Parameter(description = "Usuario manda os dados atualizados no corpo da requisicao")
+            @RequestBody ClienteDTO clienteAtualizado){
 
         ClienteDTO cliente = clienteService.atualizarCliente(id, clienteAtualizado);
 

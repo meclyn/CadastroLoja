@@ -25,7 +25,7 @@ public class ProdutoController {
     }
 
     //Procurar Produto por ID
-    @GetMapping("/listarID")
+    @GetMapping("/listar/{id}")
     public ResponseEntity<?> listarProdutoPorId(@PathVariable Long id){
 
         ProdutoDTO produto = produtoService.listarProdutoPorId(id);
