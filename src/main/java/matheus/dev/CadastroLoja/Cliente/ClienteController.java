@@ -59,6 +59,12 @@ public class ClienteController {
 
     //Mostrar todos os Clientes
     @GetMapping("/listar")
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Clientes encontrado com sucesso"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Requisição inválida")
+    })
+
+    @Operation(summary = "Lista os clientes", description = "Rota lista todos os clientes do banco de dados")
     public ResponseEntity<List<ClienteDTO>> listarClientes() {
         List<ClienteDTO> clientes = clienteService.listarClientes();
         return ResponseEntity.ok(clientes);
@@ -90,6 +96,12 @@ public class ClienteController {
     }
 
     //Deletar Cliente
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "200", description = "Cliente deletado com sucesso"),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "400", description = "Requisição inválida")
+    })
+
+    @Operation(summary = "Deleta um cliente por ID", description = "Rota deleta cliente pelo seu ID")
     @DeleteMapping("/deletar/{id}")
     public ResponseEntity<String> deletarCliente(@PathVariable Long id) {
 
